@@ -1054,18 +1054,24 @@
   position: relative;
   overflow: hidden;
 }
+/* 영문명은 이미지 왼쪽 빈 자리에 오른쪽 정렬로 붙인다.
+   이미지 시작점 = 50% - 700px(pic_box 반폭) + 380px(padding-left) = 50% - 320px,
+   여기서 40px 띄워 right: 50% + 360px. left: 390px 고정이면 화면 폭·이름 길이에 따라
+   이미지 밑으로 파고든다. 이름이 남은 폭보다 길면 위로 줄바꿈된다(bottom 기준).
+   1650px 이하에서는 숨긴다. */
 .main_pic .pic_title {
   position: absolute;
   margin: 0 auto;
-  left: 390px;
+  right: calc(50% + 360px);
   bottom: 100%;
+  max-width: calc(50% - 380px);
   font-family: var(--font-en-main);
   font-size: 80px;
   line-height: 0.8;
   letter-spacing: -5px;
   opacity: 0.1;
   font-weight: 100;
-  text-align: left;
+  text-align: right;
   z-index: 5;
   color: #333;
 }
