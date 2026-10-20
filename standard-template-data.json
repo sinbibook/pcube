@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "version": "1.8.0",
-    "generatedAt": "2026-10-20T08:34:58.173543318Z",
+    "version": "1.9.0",
+    "generatedAt": "2026-10-20T08:38:14.661083555Z",
     "templateType": "trip_a",
     "propertyId": "36e8bf3c-1c4f-4631-a94c-2a7dbb22c001",
     "homepageId": "01a151da-8f69-7b87-a9df-d99e1d1d505b"
@@ -27,7 +27,7 @@
     "province": "도/시",
     "city": "시/군/구",
     "domain": "pcube.kr",
-    "realtimeBookingId": "https://www.bookingplay.co.kr/booking/1/1652",
+    "realtimeBookingId": "https://www.bookingplay.co.kr/partner/item/7517/calendar_list/",
     "ybsId": "64644",
     "tripPropertyId": "1652",
     "partnerType": "distributor_a",
