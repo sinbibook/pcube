@@ -96,7 +96,8 @@
 
           <div class="sub_cont">
             <!-- s: about_top — 인삿말 (원본 about.html 상단 블록)
-                 ⚠️ .about_txt_box 는 position:absolute right/top:0 이라 이미지 3장 우측 상단에 앉는다.
+                 ⚠️ .about_top 은 grid 한 칸에 이미지 3장과 .about_txt_box 를 겹쳐 놓는다. 글은 우측 상단(폭 30%),
+                    이미지는 칸 바닥. 글이 길면 칸이 늘어 이미지가 아래로 밀린다 (글 잘림 · 겹침 없음).
                     strong 은 --font-ko-main 30px 슬롯이라 한글 여러 줄이 정상이다. -->
             <div class="about_top sub_inner">
               <!-- data-* 속성 : data-main-hero-images | 동적 매핑 필요

@@ -447,7 +447,7 @@ about[i] 기준으로 동적 생성 (li.landing_card > a):
 | `data-index-hero-description`    | `.main_txt_top p`                                        | `hero.description` → 폴백 `property.subtitle` (`firstText`)                 |
 | `data-property-name`             | `.main_title p span`, `.land_btm p span`                 | `property.name`                                                             |
 | `data-index-room-slides`         | `.main_room .swiper-container_special .swiper-wrapper`   | `customFields.roomtypes[]` × `rooms[]` id 매칭                              |
-| `data-index-special-list`        | `.main_spe .spe_list`                                    | `property.facilities[]`                                                     |
+| `data-index-special-list`        | `.main_spe .spe_list`                                    | `property.facilities[0..2]` (최대 3개)                                       |
 | `data-index-landscape-slides`    | `.main_landscape .swiper-container_room .swiper-wrapper` | `getLandscapeImages()`                                                      |
 | `data-index-closing-images`      | `.main_pic .pic_list` (`img01`/`img02`/`img03`)          | `pages.index.sections[0].closing.images[isSelected][0..2]`                  |
 | `data-index-closing-title`       | `.main_pic .txt_box strong`                              | `closing.title` → 폴백 `"Welcome to {getPropertyNameEn()}"`                 |
@@ -470,15 +470,15 @@ roomtypes[i] 기준으로 동적 생성:
 ### `data-index-special-list` 항목 내부 구조
 
 ```
-property.facilities[i] 기준으로 동적 생성:
+property.facilities[0..2] 기준으로 동적 생성 (최대 3개, 3개 이하면 있는 만큼):
 - .parallax-window[data-parallax="scroll"][data-image-src={images[0].url}]
 - <a class="spe_in_txt" href="./facility.html?id={id}">
 - <strong> : firstText(nameEn, name)
-- <p>      : firstText(description)   ← 시설 설명
+- <p>      : nameEn 이 있을 때만 name, 없으면 숨김   ← 시설 설명은 쓰지 않는다
 ```
 
 > **`<p>` 는 원래 한글 시설명 자리였다.** 원본은 `strong`=영문명 / `p`=한글명 구조지만, `facilities[]` 에 `nameEn` 이 없는 응답이 일반적이라 `strong` 이 한글명으로 폴백되면서 `p` 가 같은 이름을 반복하게 된다.
-> 그래서 `p` 는 **시설 설명(`description`)** 을 쓴다. `nameEn` 이 실제로 있어 `strong` 이 영문일 때만 원본대로 `p` 에 한글명을 넣고, 둘 다 없으면 `p` 를 숨겨 중복 노출을 막는다.
+> 그래서 `nameEn` 이 실제로 있어 `strong` 이 영문일 때만 원본대로 `p` 에 한글명을 넣고, 아니면 `p` 를 숨겨 중복 노출을 막는다. **시설 설명(`description`)은 이 영역에 쓰지 않는다.**
 
 > ⚠️ **`.parallax-window` 에 `background-image` 를 직접 주지 말 것.** `.parallax-mirror` 가 `z-index:-100` 이라 요소 자신의 배경에 가려져 패럴랙스가 죽고 `cover` 크롭만 남는다.
 > CSS 폴백은 `common.js` 의 `initParallax()` 가 **`$.fn.parallax` 가 없을 때만** 건다.
