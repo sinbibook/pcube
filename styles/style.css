@@ -2044,9 +2044,17 @@
   margin: 230px auto 0;
   overflow: hidden;
   position: relative;
+  /* 이미지 3장과 인삿말을 같은 칸에 겹쳐 놓는다 (위치는 예전 absolute 우측 상단 그대로).
+     글이 길면 칸이 늘어나고, 이미지는 칸 바닥에 붙어 아래로 밀린다 — 글이 잘리거나 이미지를 덮지 않는다. */
+  display: grid;
+}
+.sub_about .about_top > .img_box,
+.sub_about .about_top > .about_txt_box {
+  grid-area: 1 / 1;
 }
 .sub_about .about_top .img_box {
   font-size: 0;
+  align-self: end;
 }
 .sub_about .about_top .img_box > div {
   display: inline-block;
@@ -2062,10 +2070,13 @@
   height: 450px;
 }
 .sub_about .about_top .about_txt_box {
-  position: absolute;
-  right: 0;
-  top: 0;
+  justify-self: end;
+  align-self: start;
+  /* 폭을 묶어 긴 줄이 img01(30%) 위로 넘어오지 않게 줄바꿈한다.
+     좁은 화면에서 30px 제목이 쪼개지지 않게 420px 까지는 넓히되, img01 오른쪽 + 40px 를 넘지 않는다 */
+  max-width: max(30%, min(420px, calc(70% - 40px)));
   text-align: right;
+  overflow-wrap: break-word;
 }
 .sub_about .about_img {
   margin-top: 100px;
@@ -2157,6 +2168,11 @@
 .sub1_2.sub_about .about_txt_box {
   margin-bottom: 0;
 }
+/* 글 아래로 img02·03(220px) + 간격 40px 자리를 비워 둔다. 글이 길어지면 이 만큼 칸이 늘어 이미지가 밀려 내려간다.
+   (위 .sub1_2 규칙과 명시도가 같아 뒤에 둔다) */
+.sub_about .about_top .about_txt_box {
+  margin: 0 0 260px;
+}
 /* main.html 은 원본 about.html(sub1_1) + view.html(sub1_2) 를 병합했다.
    외경 갤러리(.main_landscape)는 원래 sub1_2 전용이라 sub1_1 에 여백 규칙이 없다. */
 .sub_about .main_landscape {
@@ -2171,9 +2187,6 @@
 }
 
 @media only screen and (max-width: 1450px) {
-  .sub_about .about_top .about_txt_box {
-    right: 30px;
-  }
   .sub_about .about_txt_box strong {
     font-size: 28px;
   }
@@ -2219,9 +2232,6 @@
   .sub_about .about_top {
     margin: 150px auto 0;
   }
-  .sub_about .about_top .about_txt_box {
-    right: 20px;
-  }
   .sub_about .about_top .about_txt_box strong {
     font-size: 25px;
   }
@@ -2263,7 +2273,10 @@
     height: 200px;
   }
   .sub_about .about_top .about_txt_box {
-    position: static;
+    grid-area: 2 / 1;
+    justify-self: stretch;
+    max-width: none;
+    margin: 0;
   }
   .sub1_1.sub_about .about_top .about_txt_box {
     margin: 0;
